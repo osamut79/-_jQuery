@@ -91,51 +91,41 @@
       ],
     };
 
-    $(function(){
-      $('.js-fortune-start').click(function(){
-        $('.result').fadeIn(1000);
-      })
+    $('.js-fortune-start').click(function(){
+      $('.result').fadeIn(1000);
+      setText();
     });
 
-    $(function(){
-      $('.start-button').click(function(){
+    $('.start-button').click(function(){
         $('.start-button').toggleClass('none');
-      })
     });
 
-    $(function(){
-      $('.js-fortune-restart').click(function(){
+     $('.js-fortune-restart').click(function(){
         $('.result').fadeOut(1000);
-      })
+        toggleStartClass(this, '運勢を占う！');
     });
 
-    for (let i in fortuneResults){
-      console.log("fortuneResults."+i+'='+fortuneResults[i]);
+    $('.js-fortune-restart').click(function(){
+        toggleStartClass(this, 'もう一度占う！')
+    });
+
+    function setText(){
+      const money_rand = Math.floor( Math.random() * 3 );
+      $('.radius.money .stars').text(fortuneResults['money'][money_rand]['stars']);
+      $('.radius.money .detail').text(fortuneResults['money'][money_rand]['detail']);
+
+      const work_rand = Math.floor( Math.random() * 3 );
+      $('.radius.work .stars').text(fortuneResults['work'][work_rand]['stars']);
+      $('.radius.work .detail').text(fortuneResults['work'][work_rand]['detail']);
+
+      const health_rand = Math.floor( Math.random() * 3 );
+      $('.radius.health .stars').text(fortuneResults['health'][health_rand]['stars']);
+      $('.radius.health .detail').text(fortuneResults['health'][health_rand]['detail']);
     }
 
-    let money_num = Math.floor( Math.random() * 3 );
-      $(function(){
-        $('.radius.money .stars').text(fortuneResults['money'][money_num]['stars']);
-      });
-      $(function(){
-        $('.radius.money .detail').text(fortuneResults['money'][money_num]['detail']);
-      });
-
-    let work_num = Math.floor( Math.random() * 3 );
-      $(function(){
-        $('.radius.work .stars').text(fortuneResults['work'][work_num]['stars']);
-      });
-      $(function(){
-        $('.radius.work .detail').text(fortuneResults['work'][work_num]['detail']);
-      });
-
-    let health_num = Math.floor( Math.random() * 3 );
-      $(function(){
-        $('.radius.health .stars').text(fortuneResults['health'][health_num]['stars']);
-      });
-      $(function(){
-        $('.radius.health .detail').text(fortuneResults['health'][health_num]['detail']);
-      });
+    function toggleStartClass(element, text){
+      $(element).toggleClass('.js-fortune-start').toggleClass('.js-fortune-restart')
+    }
 
     </script>
   </body>
